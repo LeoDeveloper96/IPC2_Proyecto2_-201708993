@@ -6,6 +6,7 @@ from Scripts.Utilidades.Archivo import Archivo
 
 
 class Menu:
+    archivo = Archivo()
 
     def menu(self):
         print("\n")
@@ -21,7 +22,8 @@ class Menu:
         if not re.search(patron, entrada): return self.menu()
 
         if entrada == "1":
-            pass
+            self.archivo.cargarXMl()
+            self.menu()
         elif entrada == "2":
             pass
         elif entrada == "3":

@@ -1,15 +1,19 @@
+import os
+import tkinter as tk
+from tkinter import filedialog
+import xml.etree.ElementTree as ET
+
+from Scripts.Utilidades.ContextManager import ContextManager
+
+
 class Archivo:
 
-    def __init__(self,nombre,metodo):
-        self.archivo = open(nombre, metodo)
-
-    def __enter__(self):
-        return self.archivo
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        print(f"{exc_type},{exc_val},{exc_tb}")
-        self.archivo.close()
-        if type == Exception:
-            return True
-
-
+    def cargarXMl(self):
+        root = tk.Tk()
+        root.withdraw()
+        ruta = os.getcwd() + "\\Archivos prueba"
+        nombre_archivo = filedialog.askopenfilename(initialdir=ruta, title="Seleccionar un archivo",
+                                                    filetypes=(("texto", "*.xml"), ("todos", "*.*")))
+        with ContextManager(nombre_archivo, "r", encoding="utf8") as f:
+            arbol = ET.parse(nombre_archivo, parser=ET.XMLParser(encoding='iso-8859-5'))
+            raiz = arbol.getroot()
